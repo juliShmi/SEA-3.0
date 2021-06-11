@@ -1,0 +1,36 @@
+{
+
+"personen": [
+
+{
+"Salutation":"Mr",
+"Firstname":"Tony",
+"Lastname":"Stark"
+},
+{
+"Salutation":"Mr",
+"Firstname":"Peter",
+"Lastname":"Parker"
+},
+ {
+"Salutation":"Mrs",
+"Firstname":"Natasha",
+"Lastname":"Romanoff"
+},
+{
+"Salutation":"Mr",
+"Firstname":"Bruce",
+"Lastname":"Banner"
+},
+{
+"Salutation":"Mr",
+"Firstname":"Thor",
+"Lastname":"Odynsson"
+},
+{
+"Salutation":"Mr",
+"Firstname":"Scott",
+"Lastname":"Lang"
+}
+]
+}
