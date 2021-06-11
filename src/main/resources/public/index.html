@@ -22,6 +22,8 @@
    }
    img {
     margin: auto; 
+    padding: 8px 50px;
+    max-width: 100%;
    }
    h3 {
 	
@@ -36,12 +38,12 @@
 	 min-height: 100vh;
 	 padding: 8px 50px;
 	 }
-	   
+
   </style>
   </header>
   <body>
   <article class="no_background">
-<center><img src="css/512px-Marvel's_The_Avengers_logo.svg.png"></center>
+<center><img id="Logo" src="css/512px-Marvel's_The_Avengers_logo.svg.png"></center>
 <center><a href="https://en.wikipedia.org/wiki/The_Avengers_(2012_film)"><button><strong>Learn more about Avengers</strong></button></a></center>
 
 </article>
@@ -49,43 +51,14 @@
 <h3>Our Team</h3>
 <p id="id4711"> </p>
 <hr></hr>
-<div>Hier kann ich was schreiben</div>
+<div></div>
 <table id="table01" style="width:100%" >
 <center>  <tr>
     <th>Salutation</th>
 	<th>Firstname</th>
     <th>Lastname</th>
   </tr>
-  <tr>
-    <td id ="psalut">Mr</td>
-    <td id ="pfn">Tony</td>
-    <td id ="pln">Stark</td>
-  </tr>
-  <tr>
-    <td id ="psalut">Mr</td>
-    <td id ="pfn">Peter</td>
-    <td id ="pln">Parker</td>
-  </tr>
-   <tr>
-    <td id ="psalut">Mrs</td>
-    <td id ="pfn">Natasha</td>
-    <td id ="pln">Romanoff</td>
-	 </tr>
- <tr>
-    <td id ="psalut">Mr</td>
-    <td id ="pfn">Bruce</td>
-    <td id ="pln">Banner</td>
-	 </tr>
- <tr>
-    <td id ="psalut">Mr</td>
-    <td id ="pfn">Thor</td>
-    <td id ="pln">Odynsson</td>
-	 </tr>
-	 <tr>
-    <td id ="psalut">Mr</td>
-    <td id ="pfn">Scott</td>
-    <td id ="pln">Lang</td>
-  </tr>
+ 
 </table>
 
 </article>
@@ -93,16 +66,21 @@
 
 <h5>Join us!</h5>
 
-<center><form>
+<center>
+<form>
   <label for="fname">First name:</label><br>
   <input type="text" id="fname" name="fname"><br>
+  
   <label for="lname">Last name:</label><br>
   <input type="text" id="lname" name="lname">
-  <label for="mail">E-Mail:</label><br>
-  <input type="text" id="mail" name="mail"><br>
-  <input type="submit" value="Submit">
+  
+  <label for="salut">Salutation:</label><br>
+  <input type="text" id="salut" name="salut"><br>
+  
+  <input id="submitButton" type="submit" value="Submit">
 
-</form></center>
+</form>
+</center>
 
 </article>
   </body>
