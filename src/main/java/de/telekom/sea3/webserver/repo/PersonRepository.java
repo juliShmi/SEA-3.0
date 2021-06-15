@@ -9,5 +9,9 @@ public class PersonRepository {
 		super();
 		System.out.println("PersonRepository instanziert: " +this.toString());
 	}
+	
+	public int getSize() {
+		return 0;
+	}
 
 }

@@ -18,4 +18,8 @@ public class PersonService {
 
 	}
 
+	public int getSize() {
+		return personRepository.getSize();
+	}
+
 }
