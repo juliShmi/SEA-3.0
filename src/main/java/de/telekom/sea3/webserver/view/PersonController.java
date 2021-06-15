@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import de.telekom.sea3.webserver.model.Personen;
 import de.telekom.sea3.webserver.repo.PersonRepository;
 import de.telekom.sea3.webserver.service.PersonService;
 
@@ -23,6 +24,7 @@ public class PersonController {
 		this.personService = personService;
 		System.out.println("PersonService instanziert: " + this.personService.toString());
 	}
+	
 
 	// URL: "http://localhost:8080/size"
 	@GetMapping("/size")
