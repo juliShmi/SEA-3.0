@@ -1,15 +1,17 @@
 package de.telekom.sea3.webserver.view;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
+import de.telekom.sea3.webserver.model.Person;
 import de.telekom.sea3.webserver.model.Personen;
-import de.telekom.sea3.webserver.repo.PersonRepository;
 import de.telekom.sea3.webserver.service.PersonService;
 
-@Controller
+@RestController
 public class PersonController2 {
 
 	private PersonService personService;
@@ -18,64 +20,33 @@ public class PersonController2 {
 	public PersonController2(PersonService personService) {
 		super();
 		this.personService = personService;
-		
-	}
-	
-	@GetMapping("/allPersons")
-	@ResponseBody
-	public String getAllPersons() {
-		Personen personen = personService.getAllPersons();
-		//personen.toJson();
-		String allPersons = "{\r\n"
-				+ "\r\n"
-				+ "\"personen\": [\r\n"
-				+ "\r\n"
-				+ "{\r\n"
-				+ "\"Salutation\":\"Mr\",\r\n"
-				+ "\"Firstname\":\"Tony\",\r\n"
-				+ "\"Lastname\":\"Stark\"\r\n"
-				+ "},\r\n"
-				+ "{\r\n"
-				+ "\"Salutation\":\"Mr\",\r\n"
-				+ "\"Firstname\":\"Peter\",\r\n"
-				+ "\"Lastname\":\"Parker\"\r\n"
-				+ "},\r\n"
-				+ " {\r\n"
-				+ "\"Salutation\":\"Mrs\",\r\n"
-				+ "\"Firstname\":\"Natasha\",\r\n"
-				+ "\"Lastname\":\"Romanoff\"\r\n"
-				+ "},\r\n"
-				+ "{\r\n"
-				+ "\"Salutation\":\"Mr\",\r\n"
-				+ "\"Firstname\":\"Bruce\",\r\n"
-				+ "\"Lastname\":\"Banner\"\r\n"
-				+ "},\r\n"
-				+ "{\r\n"
-				+ "\"Salutation\":\"Mr\",\r\n"
-				+ "\"Firstname\":\"Thor\",\r\n"
-				+ "\"Lastname\":\"Odynsson\"\r\n"
-				+ "},\r\n"
-				+ "{\r\n"
-				+ "\"Salutation\":\"Mr\",\r\n"
-				+ "\"Firstname\":\"Scott\",\r\n"
-				+ "\"Lastname\":\"Lang\"\r\n"
-				+ "}\r\n"
-				+ "]\r\n"
-				+ "}";
-		//String alternative = String.format(HTMLTEMPLATE, personService.getSize());
-		//String alternative2 = String.valueOf(personService.getSize());
-		// return http als String
-		return allPersons;
+
 	}
 
-//	// URL: "http://localhost:8080/size"
-//	@GetMapping("/size")
-//	@ResponseBody
-//	public String getSize() {
-//		String alternative = String.format(HTMLTEMPLATE, personService.getSize());
-//		//String alternative2 = String.valueOf(personService.getSize());
-//		// return http als String
-//		return alternative;
-//	}
+	// URL: @see <a href="http://localhost:8080/json/persons/all"></a>
+	@GetMapping("json/persons/all")
+	public Personen getAllPersons() {
+		Personen personen = personService.getAllPersons();
+		return personen;
+	}
+
+	// URL: "http://localhost:8080/size"
+	@GetMapping("json/persons/size")
+	public Integer getSize() {
+		int size = personService.getSize();
+//		String string1 = String.format("{\n" + "	\"size\": %d\n" + "}", size);
+		return size;
+	}
+
+	@GetMapping("json/persons/{id}")
+	public Person getPerson(@PathVariable("id") int id) {
+		return personService.get(id);
+
+	}
+
+	@PostMapping("json/person")
+	public Person addPerson(@RequestBody Person person) {
+		return personService.add(person);
+	}
 
 }

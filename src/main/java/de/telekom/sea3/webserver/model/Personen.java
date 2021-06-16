@@ -4,8 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Personen {
-	
+
 	private List<Person> personen = new ArrayList<Person>();
+
+	public Personen(List<Person> all) {
+		this.personen = all;
+		// TODO Auto-generated constructor stub
+	}
 
 	public List<Person> getPersonen() {
 		return personen;
@@ -14,6 +19,5 @@ public class Personen {
 	public void setPersonen(List<Person> personen) {
 		this.personen = personen;
 	}
-	
 
 }
