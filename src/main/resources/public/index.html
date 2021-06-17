@@ -51,6 +51,7 @@
 <hr></hr>
 <table id="table01" style="width:100%" >
 <center>  <tr>
+	<th>ID</th>
     <th>Salutation</th>
 	<th>Firstname</th>
     <th>Lastname</th>
@@ -63,14 +64,32 @@
 <h5>Join us!</h5>
 
 <center><form>
-  <label for="fname">First name:</label><br>
-  <input type="text" id="fname" name="fname"><br>
-  <label for="lname">Last name:</label><br>
-  <input type="text" id="lname" name="lname">
-  <label for="salut">Salutation:</label><br>
-  <input type="text" id="salut" name="salut"><br>
-  <input id ="submitButton" type="submit" value="Submit">
+  <label for="firstname">First name:</label><br>
+  <input type="text" id="firstname" name="firstname"><br>
+  <label for="lastname">Last name:</label><br>
+  <input type="text" id="lastname" name="lastname">
+  <label for="salutation">Salutation:</label><br>
+    <select id="salutationChoice">
+      <option id="salutation" value="Mr">Mr</option>
+      <option id="salutation" value="Mrs">Mrs</option>
+      <option id="salutation" value="Diverse">Diverse</option>
+    </select>
+  <button id ="submitButton" type="submit">Submit</button>
 
+</form></center>
+
+</article>
+
+<article>
+
+<h5>Administration page</h5>
+
+<center><form>
+  	<button id ="deleteAll" type="deleteAll">Delete All</button>
+ 	<button id ="update" type="update">Update</button>
+  	<button id ="deleteID" type="deleteID">Delete</button>
+  	<label for="deletePersonID">Input ID to delete:</label><br>
+  	<input type="number" id="deletePersonID" name="deletePersonID"><br>
 </form></center>
 
 </article>

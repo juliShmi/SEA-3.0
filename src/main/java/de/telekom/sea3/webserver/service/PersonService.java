@@ -25,7 +25,7 @@ public class PersonService {
 	}
 
 	public Person get(int id) {
-		return new Person();
+		return personRepository.getID(id);
 	}
 
 	public Personen getAllPersons() {
@@ -34,8 +34,22 @@ public class PersonService {
 
 	public Person add(Person person) {
 		personRepository.add(person);
+		System.out.println("Person wurde angelegt!");
 		return person;
 
+	}
+
+	public void deleteAll() {
+		personRepository.deleteAll();
+		System.out.println("List is clear! Size is: " + getSize());
+
+	}
+
+	public void deletePerson(Person person) {
+		personRepository.deletePerson(person);
+		System.out.println("Person deleted");
+		// TODO Auto-generated method stub
+		
 	}
 
 }
