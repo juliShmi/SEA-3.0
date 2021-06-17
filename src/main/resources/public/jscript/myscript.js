@@ -5,12 +5,14 @@ function getJson(irgendwas) { 	// irgendwas beinhaltet json mit allen kommunikat
 
 function getTxtFromJsonUndPackInsHTML(myjson) {
 	var tabelle = document.getElementById("table01");
+	var id = 1;
 	for (var laufvariable of myjson.personen) {
 		// neue Zeile am Ende der exist. Tabelle anfügen
 		tabelle.insertAdjacentHTML("beforeend", "<tr>"
-			+ "<td>" + laufvariable.Salutation + "</td>"
-			+ "<td>" + laufvariable.Firstname + "</td>"
-			+ "<td>" + laufvariable.Lastname + "</td>"
+			+ `<td> ${id++} </td>`
+			+ "<td>" + laufvariable.salutation + "</td>"
+			+ "<td>" + laufvariable.firstname + "</td>"
+			+ "<td>" + laufvariable.lastname + "</td>"
 			+ "</tr>")
 		//	document.getElementById("psalut").textContent = laufvariable.Salutation;
 		//	document.getElementById("pfn").textContent = laufvariable.Firstname;
@@ -18,20 +20,24 @@ function getTxtFromJsonUndPackInsHTML(myjson) {
 	}
 }
 
+
+
 function onInputClick(event) {
 	event.preventDefault();
 	console.log("click");
+	
+	
 
-	var salut = document.getElementById("salut").value;
-	console.log(salut);
+	var salutation = document.getElementById("salutation").value;
+	console.log(salutation);
 
-	var fname = document.getElementById("fname").value;
-	console.log(fname);
+	var firstname = document.getElementById("firstname").value;
+	console.log(firstname);
 
-	var lname = document.getElementById("lname").value;
-	console.log(lname);
+	var lastname = document.getElementById("lastname").value;
+	console.log(lastname);
 
-	var jsonData = `{"Salutation": "${salut}", "Firstname": "${fname}", "Lastname":"${lname}"}`;
+	var jsonData = `{"salutation":"${salutation}", "firstname":"${firstname}", "lastname":"${lastname}"}`;
 	console.log(jsonData);
 
 	fetch("http://localhost:8080/json/person", {
@@ -41,6 +47,37 @@ function onInputClick(event) {
 	});
 }
 
+function deleteAll(event) {
+	event.preventDefault();
+	console.log("click");
+
+	var jsonData = `{"salutation":null, "firstname":null, "lastname":null}`;
+	console.log(jsonData);
+
+	fetch("http://localhost:8080/json/persons/deleteall", {
+		method: 'POST',
+		body: jsonData,
+		headers: { 'Content-Type': 'application/json' }
+	});
+
+}
+
+function deleteByID(event) {
+	event.preventDefault();
+	console.log("click");
+	var deletingID = parseInt(document.getElementById("deletePersonID").value);
+	console.log(deletingID);
+	fetch(`http://localhost:8080/json/person/${deletingID}`, {
+		method: 'DELETE'
+	});
+
+}
+
+var deleteID = document.getElementById("deleteID");
+deleteID.addEventListener("click", deleteByID);
+
+var deleteAllInput = document.getElementById("deleteAll");
+deleteAllInput.addEventListener("click", deleteAll);
 
 var input = document.getElementById("submitButton");
 input.addEventListener("click", onInputClick);
@@ -48,6 +85,6 @@ input.addEventListener("click", onInputClick);
 
 fetch("http://localhost:8080/json/persons/all")		//to add all participants from JSON Personen
 	.then(getJson) 								//  entspricht: .then( irgendwas => irgendwas.json() )
-	.then(getTxtFromJsonUndPackInsHTML) 	
-	
+	.then(getTxtFromJsonUndPackInsHTML)
+
 		// entpricht: cell.textContent = myjson.personen[0].vorname);
