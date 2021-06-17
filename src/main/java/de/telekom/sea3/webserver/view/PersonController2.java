@@ -40,6 +40,7 @@ public class PersonController2 {
 //		String string1 = String.format("{\n" + "	\"size\": %d\n" + "}", size);
 		return new Size(personService.getSize());
 	}
+	
 
 	@GetMapping("/json/persons/{id}")
 	public Person getPerson(@PathVariable("id") int id) {

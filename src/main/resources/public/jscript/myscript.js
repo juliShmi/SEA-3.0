@@ -13,6 +13,7 @@ function getTxtFromJsonUndPackInsHTML(myjson) {
 			+ "<td>" + laufvariable.salutation + "</td>"
 			+ "<td>" + laufvariable.firstname + "</td>"
 			+ "<td>" + laufvariable.lastname + "</td>"
+			+ "<td>" + laufvariable.email + "</td>"
 			+ "</tr>")
 		//	document.getElementById("psalut").textContent = laufvariable.Salutation;
 		//	document.getElementById("pfn").textContent = laufvariable.Firstname;
@@ -28,7 +29,7 @@ function onInputClick(event) {
 	
 	
 
-	var salutation = document.getElementById("salutation").value;
+	var salutation = document.getElementById("salutationChoice").value;
 	console.log(salutation);
 
 	var firstname = document.getElementById("firstname").value;
@@ -36,8 +37,11 @@ function onInputClick(event) {
 
 	var lastname = document.getElementById("lastname").value;
 	console.log(lastname);
+	
+	var email = document.getElementById("email").value;
+	console.log(email);
 
-	var jsonData = `{"salutation":"${salutation}", "firstname":"${firstname}", "lastname":"${lastname}"}`;
+	var jsonData = `{"salutation":"${salutation}", "firstname":"${firstname}", "lastname":"${lastname}","email":"${email}"}`;
 	console.log(jsonData);
 
 	fetch("http://localhost:8080/json/person", {
@@ -51,7 +55,7 @@ function deleteAll(event) {
 	event.preventDefault();
 	console.log("click");
 
-	var jsonData = `{"salutation":null, "firstname":null, "lastname":null}`;
+	var jsonData = `{"salutation":null, "firstname":null, "lastname":null, "email":null}`;
 	console.log(jsonData);
 
 	fetch("http://localhost:8080/json/persons/deleteall", {
