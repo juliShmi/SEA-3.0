@@ -5,6 +5,7 @@ public class Person {
 	private String Salutation;
 	private String Firstname;
 	private String Lastname;
+	private String email;
 
 	public String getSalutation() {
 		return Salutation;
@@ -28,6 +29,14 @@ public class Person {
 
 	public void setLastname(String lastname) {
 		Lastname = lastname;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }

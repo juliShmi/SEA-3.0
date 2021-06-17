@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang='de' xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<title>Titel</title>
+</head>
+<body>
+	<h1>Person list</h1>
+	<ul th:each="person : ${personen}">
+		<li th:text="${person.firstname}"></li>
+		<li th:text="${person.lastname}"></li>
+		<li th:text="${person.salutation}"></li>
+		<li th:text="${person.email}"></li>
+	</ul>
+</body>
+</html>
