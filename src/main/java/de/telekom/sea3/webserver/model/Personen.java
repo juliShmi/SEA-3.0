@@ -5,14 +5,14 @@ import java.util.List;
 
 public class Personen {
 
-	private List<Person> personen = new ArrayList<Person>();
+	private Iterable<Person> personen = new ArrayList<Person>();
 
-	public Personen(List<Person> all) {
-		this.personen = all;
+	public Personen(Iterable<Person> iterable) {
+		this.personen = iterable;
 		// TODO Auto-generated constructor stub
 	}
 
-	public List<Person> getPersonen() {
+	public Iterable<Person> getPersonen() {
 		return personen;
 	}
 

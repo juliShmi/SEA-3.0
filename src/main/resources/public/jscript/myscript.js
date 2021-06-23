@@ -5,11 +5,10 @@ function getJson(irgendwas) { 	// irgendwas beinhaltet json mit allen kommunikat
 
 function getTxtFromJsonUndPackInsHTML(myjson) {
 	var tabelle = document.getElementById("table01");
-	var id = 1;
 	for (var laufvariable of myjson.personen) {
 		// neue Zeile am Ende der exist. Tabelle anfügen
 		tabelle.insertAdjacentHTML("beforeend", "<tr>"
-			+ `<td> ${id++} </td>`
+			+ "<td>"+laufvariable.id+"</td>"
 			+ "<td>" + laufvariable.salutation + "</td>"
 			+ "<td>" + laufvariable.firstname + "</td>"
 			+ "<td>" + laufvariable.lastname + "</td>"
@@ -27,8 +26,6 @@ function onInputClick(event) {
 	event.preventDefault();
 	console.log("click");
 	
-	
-
 	var salutation = document.getElementById("salutationChoice").value;
 	console.log(salutation);
 
@@ -44,7 +41,7 @@ function onInputClick(event) {
 	var jsonData = `{"salutation":"${salutation}", "firstname":"${firstname}", "lastname":"${lastname}","email":"${email}"}`;
 	console.log(jsonData);
 
-	fetch("http://localhost:8080/json/person", {
+	fetch("http://localhost:8222/json/person", {
 		method: 'POST',
 		body: jsonData,
 		headers: { 'Content-Type': 'application/json' }
@@ -58,8 +55,8 @@ function deleteAll(event) {
 	var jsonData = `{"salutation":null, "firstname":null, "lastname":null, "email":null}`;
 	console.log(jsonData);
 
-	fetch("http://localhost:8080/json/persons/deleteall", {
-		method: 'POST',
+	fetch("http://localhost:8222/json/persons/deleteall", {
+		method: 'DELETE',
 		body: jsonData,
 		headers: { 'Content-Type': 'application/json' }
 	});
@@ -71,7 +68,7 @@ function deleteByID(event) {
 	console.log("click");
 	var deletingID = parseInt(document.getElementById("deletePersonID").value);
 	console.log(deletingID);
-	fetch(`http://localhost:8080/json/person/${deletingID}`, {
+	fetch(`http://localhost:8222/json/person/${deletingID}`, {
 		method: 'DELETE'
 	});
 
@@ -87,7 +84,7 @@ var input = document.getElementById("submitButton");
 input.addEventListener("click", onInputClick);
 
 
-fetch("http://localhost:8080/json/persons/all")		//to add all participants from JSON Personen
+fetch("http://localhost:8222/json/persons/all")		//to add all participants from JSON Personen
 	.then(getJson) 								//  entspricht: .then( irgendwas => irgendwas.json() )
 	.then(getTxtFromJsonUndPackInsHTML)
 

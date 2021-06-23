@@ -1,70 +1,81 @@
 package de.telekom.sea3.webserver.view;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import de.telekom.sea3.webserver.model.Person;
 import de.telekom.sea3.webserver.model.Personen;
 import de.telekom.sea3.webserver.model.Size;
+import de.telekom.sea3.webserver.repo.PersonRepository;
 import de.telekom.sea3.webserver.service.PersonService;
 
 @RestController
+@RequestMapping
 public class PersonController2 {
 
-	private PersonService personService;
-
-
 	@Autowired
-	public PersonController2(PersonService personService) {
-		super();
-		this.personService = personService;
+	private PersonRepository personRepository;
 
-	}
-
-	// URL: @see <a href="http://localhost:8080/json/persons/all"></a>
 	@GetMapping("/json/persons/all")
-	public Personen getAllPersons() {
-		Personen personen = personService.getAllPersons();
-		return personen;
+	public List<Person> getAllPersons() {
+		return (List<Person>) personRepository.findAll();
 	}
 
-	// URL: "http://localhost:8080/size"
 	@GetMapping("/json/persons/size")
-	public Size getSize() {
-
-//		String string1 = String.format("{\n" + "	\"size\": %d\n" + "}", size);
-		return new Size(personService.getSize());
+	public void getSize() {
+		System.out.println(personRepository.count());
 	}
-	
 
 	@GetMapping("/json/persons/{id}")
-	public Person getPerson(@PathVariable("id") int id) {
-		return personService.get(id);
+	public ResponseEntity<Person> getPersonById(@PathVariable(value = "id") Long id) {
+		Person person = (Person) personRepository.findById(id).get();
+
+		return ResponseEntity.ok().body(person);
 
 	}
 
 	@PostMapping("/json/person")
 	public Person addPerson(@RequestBody Person person) {
-		return personService.add(person);
+		return personRepository.save(person);
 	}
 
-	@PostMapping("/json/persons/deleteall")
+	@PutMapping("/json/person/update/{id}")
+	public ResponseEntity<Person> updateEmployee(@PathVariable(value = "id") Long id,
+			@RequestBody Person personDetails) {
+		Person person = personRepository.findById(id).get();
+		person.setEmail(personDetails.getEmail());
+		person.setLastname(personDetails.getLastname());
+		person.setFirstname(personDetails.getFirstname());
+		final Person updatedperson = personRepository.save(person);
+		return ResponseEntity.ok(updatedperson);
+	}
+
+	@DeleteMapping("/json/persons/deleteall")
 	public void deleteAll() {
-		personService.deleteAll();
+		personRepository.deleteAll();
 	}
-	
+
 	@DeleteMapping("/json/person/{id}")
-	public void deletePerson(@PathVariable("id") int id) {
-		Person p = getPerson(id);
-		System.out.println(p.getFirstname()+ " " + p.getLastname());
-		personService.deletePerson(p);
+	public Map<String, Boolean> deletePerson(@PathVariable(value = "id") Long id) {
+		Person person = personRepository.findById(id).get();
+		personRepository.delete(person);
+		Map<String, Boolean> response = new HashMap<>();
+		response.put("deleted", Boolean.TRUE);
+		return response;
+
 	}
-	
-	
 
 }

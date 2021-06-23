@@ -2,6 +2,7 @@ package de.telekom.sea3.webserver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 
 @SpringBootApplication
 public class WebServer /* implements SpringBootApplication */ {

@@ -35,7 +35,7 @@ public class PersonController {
 	@GetMapping("/size")
 	@ResponseBody
 	public String getSize() {
-		String alternative = String.format(HTMLTEMPLATE, personService.getSize());
+		String alternative = String.format(HTMLTEMPLATE, personService.count());
 		// String alternative2 = String.valueOf(personService.getSize());
 		// return http als String
 		return alternative;
@@ -60,7 +60,7 @@ public class PersonController {
 	// URL:"http://localhost:8080/count"
 	@GetMapping("/size2") // Kein @ResponseBody, da es ... verhindert
 	public String getSize2(Model model) {
-		model.addAttribute("size3", personService.getSize());
+		model.addAttribute("size3", personService.count());
 		return "size";
 	}
 
