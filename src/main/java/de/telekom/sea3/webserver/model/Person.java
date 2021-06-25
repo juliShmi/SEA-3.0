@@ -25,39 +25,29 @@ public class Person {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
 
+	@Column
+	private String Salutation;
+	
+	@Version
 	private Long version;
 	
-	@Enumerated(EnumType.ORDINAL)
-	private Salutation Salutation;
 	@Column(name="FIRSTNAME")
 	private String Firstname;
 	@Column(name="LASTNAME")
 	private String Lastname;
 	@Column(name="EMAIL")
 	private String email;
-	@Column
-	private Date gebDatum;
-	@Column
+	@Column(name="ADDRESS")
 	private String address;
 
-	
-	public Person(Long id, de.telekom.sea3.webserver.model.Salutation Salutation, String Firstname, String Lastname, 
-			String address, String email ) {
-		this.id = id;
-		this.Salutation = Salutation;
-		this.Firstname = Firstname;
-		this.Lastname = Lastname;
-		this.address = address;
-		this.email = email;
-	}
 
-	public de.telekom.sea3.webserver.model.Salutation getSalutation() {
+
+	public String getSalutation() {
 		return Salutation;
 	}
 
-	public void setSalutation(de.telekom.sea3.webserver.model.Salutation salutation) {
+	public void setSalutation(String salutation) {
 		Salutation = salutation;
 	}
 
@@ -99,6 +89,14 @@ public class Person {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
 	}
 
 }

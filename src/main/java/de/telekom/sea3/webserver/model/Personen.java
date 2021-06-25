@@ -9,14 +9,16 @@ public class Personen {
 
 	public Personen(Iterable<Person> iterable) {
 		this.personen = iterable;
-		// TODO Auto-generated constructor stub
+	}
+
+	public Personen() {
 	}
 
 	public Iterable<Person> getPersonen() {
 		return personen;
 	}
 
-	public void setPersonen(List<Person> personen) {
+	public void setPersonen(Iterable<Person>personen) {
 		this.personen = personen;
 	}
 
