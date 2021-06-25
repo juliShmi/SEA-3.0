@@ -1,4 +1,9 @@
 package de.telekom.sea3.webserver.view;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -6,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
+ 
 
 import de.telekom.sea3.webserver.model.Doctor;
 import de.telekom.sea3.webserver.service.DoctorWhoService;
@@ -53,8 +59,10 @@ public class DoctorWhoController {
 		return HTMLTEMPLATE;
 	}
 	
-	@GetMapping("/doctor/<{incarnationNumber}>")
+	@GetMapping("/doctors/<{incarnationNumber}>")
 	public Doctor getQuestion(@PathVariable int incarnationNumber) {
+		
+		
 	    if(incarnationNumber >= 1 && incarnationNumber <=8) {
 	        throw new ResponseStatusException(HttpStatus.SEE_OTHER, "See another Doctor");
 	    }
@@ -62,7 +70,8 @@ public class DoctorWhoController {
 	    	 throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Impossible to retrieve the incarnation "+ incarnationNumber);
 	    }
 	    return dws.getById(incarnationNumber);
+
+	    }
 	}
 
 
-}

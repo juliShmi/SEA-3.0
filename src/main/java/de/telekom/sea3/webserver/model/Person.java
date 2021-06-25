@@ -4,10 +4,18 @@ package de.telekom.sea3.webserver.model;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.persistence.Version;
+
+
 
 
 
@@ -17,15 +25,22 @@ public class Person {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@Column(name="SALUTATION")
+
+	@Column
 	private String Salutation;
+	
+	@Version
+	private Long version;
+	
 	@Column(name="FIRSTNAME")
 	private String Firstname;
 	@Column(name="LASTNAME")
 	private String Lastname;
 	@Column(name="EMAIL")
 	private String email;
+	@Column(name="ADDRESS")
+	private String address;
+
 
 
 	public String getSalutation() {
@@ -66,6 +81,22 @@ public class Person {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
 	}
 
 }

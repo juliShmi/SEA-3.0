@@ -1,36 +1,25 @@
 {
-
-"personen": [
-
-{
-"salutation":"Mr",
-"firstname":"Tony",
-"lastname":"Stark"
-},
-{
-"salutation":"Mr",
-"firstname":"Peter",
-"lastname":"Parker"
-},
- {
-"salutation":"Mrs",
-"firstname":"Natasha",
-"lastname":"Romanoff"
-},
-{
-"salutation":"Mr",
-"firstname":"Bruce",
-"lastname":"Banner"
-},
-{
-"salutation":"Mr",
-"firstname":"Thor",
-"lastname":"Odynsson"
-},
-{
-"salutation":"Mr",
-"firstname":"Scott",
-"lastname":"Lang"
-}
-]
+	"personen": [
+		{
+			"id": 1,
+			"salutation": 0,
+			"firstname": "Tony",
+			"lastname": "Stark",
+			"address": "Washington"
+		},
+		{
+			"id": 2,
+			"salutation": 0,
+			"firstname": "Peter",
+			"lastname": "Parker",
+			"address": "Washington"
+		},
+		{
+			"id": 3,
+			"salutation": 1,
+			"firstname": "Natasha",
+			"lastname": "Romanoff",
+			"address": "Washington"
+		}
+	]
 }

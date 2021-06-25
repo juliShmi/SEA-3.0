@@ -55,7 +55,9 @@
     <th>Salutation</th>
 	<th>Firstname</th>
     <th>Lastname</th>
+    <th>Address</th>
     <th>E-Mail</th>
+    <th>Version</th>
     
   </tr>
 </table>
@@ -70,14 +72,22 @@
     <select id="salutationChoice">
       <option value="Mr">Mr</option>
       <option value="Mrs">Mrs</option>
-      <option value="Diverse">Diverse</option>
+      <option value="Other">Other</option>
     </select>
   <label for="firstname">First name:</label><br>
   <input type="text" id="firstname" name="firstname"><br>
   <label for="lastname">Last name:</label><br>
   <input type="text" id="lastname" name="lastname">
+   <div class="field">
+                <label for="id">ID for Update:  </label>
+                <input type="text" id="id" name="id">
+            </div>
+    <label for="address">Address:</label><br>
+  <input type="text" id="address" name="address"><br>
   <label for="email">E-Mail:</label><br>
-  <input type="email" id="email" name="email">
+   <input type="text" id="email" name="email"><br>
+  <label for="version">Version: </label> <br>
+	<input type="text" id="version" name="version"> <br> <br>
   <button id ="submitButton" type="submit">Submit</button>
 
 </form></center>
@@ -89,10 +99,11 @@
 <h5>Administration page</h5>
 
 <center><form>
-  	<button id ="deleteAll" type="deleteAll">Delete All</button>
- 	<button id ="update" type="update">Update</button>
-  	<button id ="deleteID" type="deleteID">Delete</button>
+  	<button id ="deleteAll" type="submit">Delete All</button>
+ 	<button id ="update" type="submit">Update</button>
+  	<button id ="deleteID" type="submit">Delete</button>
   	<label for="deletePersonID">Input ID to delete:</label><br>
+  	<button id ="refreshButton" type="submit">Refresh</button>
   	<input type="number" id="deletePersonID" name="deletePersonID"><br>
 </form></center>
 

@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import de.telekom.sea3.webserver.model.Person;
@@ -25,57 +28,61 @@ import de.telekom.sea3.webserver.service.PersonService;
 @RestController
 @RequestMapping
 public class PersonController2 {
-
+	
+	private PersonService personService;
+	
+	static Logger logger = LoggerFactory.getLogger(PersonService.class);
+	
 	@Autowired
-	private PersonRepository personRepository;
+	public PersonController2(PersonService personService) {
+		this.personService=personService;
+	}
+
 
 	@GetMapping("/json/persons/all")
-	public List<Person> getAllPersons() {
-		return (List<Person>) personRepository.findAll();
+	public Personen getAllPersons() {
+		Personen p = personService.getAllPersons();
+		return p;
+		
 	}
 
 	@GetMapping("/json/persons/size")
-	public void getSize() {
-		System.out.println(personRepository.count());
+	public Long getSize() {
+		return personService.count();
 	}
 
 	@GetMapping("/json/persons/{id}")
-	public ResponseEntity<Person> getPersonById(@PathVariable(value = "id") Long id) {
-		Person person = (Person) personRepository.findById(id).get();
-
-		return ResponseEntity.ok().body(person);
+	 public Person getPerson(@PathVariable ("id") Long id) {
+        return personService.findById(id);
 
 	}
 
-	@PostMapping("/json/person")
-	public Person addPerson(@RequestBody Person person) {
-		return personRepository.save(person);
+	@PostMapping("/json/persons")
+	 public Person addPerson(@RequestBody Person person) {
+        return personService.add(person);
 	}
 
-	@PutMapping("/json/person/update/{id}")
-	public ResponseEntity<Person> updateEmployee(@PathVariable(value = "id") Long id,
-			@RequestBody Person personDetails) {
-		Person person = personRepository.findById(id).get();
-		person.setEmail(personDetails.getEmail());
-		person.setLastname(personDetails.getLastname());
-		person.setFirstname(personDetails.getFirstname());
-		final Person updatedperson = personRepository.save(person);
-		return ResponseEntity.ok(updatedperson);
+	@PutMapping("/json/persons")
+	public Person updatePerson(@RequestBody Person person) {
+		return personService.update(person);
 	}
 
 	@DeleteMapping("/json/persons/deleteall")
 	public void deleteAll() {
-		personRepository.deleteAll();
+		personService.deleteAll();
 	}
 
-	@DeleteMapping("/json/person/{id}")
-	public Map<String, Boolean> deletePerson(@PathVariable(value = "id") Long id) {
-		Person person = personRepository.findById(id).get();
-		personRepository.delete(person);
-		Map<String, Boolean> response = new HashMap<>();
-		response.put("deleted", Boolean.TRUE);
-		return response;
+	@DeleteMapping("/json/persons/{id}")
+	public void deletePerson(@PathVariable ("id") Long id) {
+        personService.deletePerson(id);
 
 	}
+	@GetMapping("/json/select")
+	public Personen searchNachOrt(@RequestParam(name="ort", required=false) String ort) {
+		Personen personen = personService.selectPersonen(ort);
+		logger.info("Ort: " + ort);
+		return personen;
+	}
+	
 
 }
